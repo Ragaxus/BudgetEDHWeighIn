@@ -6,7 +6,8 @@ function showPriceResults() {
 
     var totalPrice = 0;
     //Parse input into JSON for scryfall /card/collection
-    var nameList = document.getElementById("deckList").value.split('\n');
+    var startingQuantityRgx = /^[0-9]* /;
+    var nameList = document.getElementById("deckList").value.split('\n').map(name => name.replace(startingQuantityRgx,""));
     //Call /card/collection
     var searchUrl = new URL("https://api.scryfall.com/cards/search");
     var params = {"unique":"prints","order":"usd","dir":"asc"};

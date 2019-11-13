@@ -11,7 +11,7 @@ function showPriceResults() {
     var searchUrl = new URL("https://api.scryfall.com/cards/search");
     var params = {"unique":"prints","order":"usd","dir":"asc"};
     nameList.forEach(name => {
-        var price;
+        var price=0;
         var set;
         params["q"] = "!\""+name+"\"";
         searchUrl.search = new URLSearchParams(params).toString();

@@ -30,7 +30,7 @@ function showPriceResults() {
         //Output total
         document.getElementById("cardPriceList").innerHTML += "<p>"+name+" -- $"+price+" ("+set+") </p>";
         totalPrice += price;
-        document.getElementById("totalPrice").innerText = totalPrice;
+        document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
         });        
     });
 }

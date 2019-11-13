@@ -2,8 +2,6 @@
 function showPriceResults() {
     document.getElementById("cardPriceList").innerHTML = "";
     document.getElementById("totalPrice").innerText = "";
-
-
     var totalPrice = 0;
     //Parse input into JSON for scryfall /card/collection
     var startingQuantityRgx = /^[0-9]* /;

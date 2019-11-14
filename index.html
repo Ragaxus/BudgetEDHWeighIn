@@ -1,5 +1,8 @@
 <html>
     <head>
+        <script type="text/javascript" src="html2canvas.js"></script>
+        <script type="text/javascript" src="canvas-toBlob.js"></script>
+        <script type="text/javascript" src="FileSaver.js"></script>
         <script src="budgetEDHWeighIn.js"></script>
         <title>Show your deck's worth. Or lack thereof.</title>
     </head>
@@ -22,16 +25,17 @@
                                 </p>
                                 <div class="w3-padding-16">
                                     <button type="button" onclick="showPriceResults()">Weigh deck</button>
+                                    <button type="button" id="saveResults" onclick="saveResults()" disabled="true">Save screenshot of results</button>
                                 </div>
                             </div>
                     </div>
                 </div>
-                <div class="w3-twothird">
+                <div class="w3-twothird" id="results">
                     <div class="w3-container w3-card w3-white w3-margin-bottom">
                             <div class="w3-container" id="totalPrice"></div>
                     </div>
                     <div class="w3-container w3-card w3-white w3-margin-bottom">
-                        <div class="w3-container errList" id="errList"></div>
+                        <div class="w3-container errList" style="visibility: hidden;" id="errList"></div>
                     </div>
                     <div class="w3-container w3-card w3-white w3-margin-bottom">
                         <div class="w3-container" id="cardPriceList"></div>

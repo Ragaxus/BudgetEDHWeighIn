@@ -1,15 +1,16 @@
-
 function showPriceResults() {
+    document.getElementById("saveResults").disabled = true;
     document.getElementById("cardPriceList").innerHTML = "";
     document.getElementById("totalPrice").innerText = "";
     var totalPrice = 0;
     //Parse input into JSON for scryfall /card/collection
     var startingQuantityRgx = /^[0-9]* /;
     var nameList = document.getElementById("deckList").value.split('\n').map(name => name.replace(startingQuantityRgx,""));
+    var namePromiseList = [];
     //Call /card/collection
     var searchUrl = new URL("https://api.scryfall.com/cards/search");
     var params = {"unique":"prints","order":"usd","dir":"asc"};
-    nameList.forEach(name => {
+    namePromiseList = nameList.map(name => { return new Promise( function(res,rej) {
         var price=0;
         var set;
         params["q"] = "!\""+name+"\"";
@@ -39,11 +40,17 @@ function showPriceResults() {
         else {
             var errListHeader=document.getElementById("errListHeader");
             if(typeof(errListHeader) == 'undefined' || errListHeader == null) { 
+                document.getElementById("errList").style.visibility="visible";
                 document.getElementById("errList").innerHTML += "<p id='errListHeader'>"+"Could not find prices for the following cards: "+"</p>";
             }
             document.getElementById("errList").innerHTML += "<p>"+name+"</p>";
         }
-        });        
+        res(1);
+        })});        
+    });
+    Promise.all(namePromiseList).then(function (vals) {
+        document.getElementById("totalPrice").innerText += ", as of "+new Date().toLocaleString();
+        document.getElementById("saveResults").disabled = false;
     });
 }
 
@@ -54,3 +61,13 @@ function getPriceToUse(printing) {
     if (!priceFoil) return priceReg;
     return Math.min(priceFoil,priceReg);
 }
+
+function saveResults() {
+    html2canvas(document.getElementById("results")).then(function(canvas) {
+        canvas.toBlob(function (blob) {
+            saveAs(blob, "screenshot.png");
+        })
+    });
+}
+
+

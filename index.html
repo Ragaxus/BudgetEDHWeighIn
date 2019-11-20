@@ -24,6 +24,15 @@
                                         <textarea id="deckList" cols="40" rows="5"></textarea>
                                 </p>
                                 <div class="w3-padding-16">
+                                    <div>
+                                        <label>Cheap cards first</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="sortExpensiveFirst">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label>Expensive cards first</label>
+                                    </div>
+                                    <br>
                                     <button type="button" onclick="showPriceResults()">Weigh deck</button>
                                     <button type="button" id="saveResults" onclick="saveResults()" disabled="true">Save screenshot of results</button>
                                 </div>

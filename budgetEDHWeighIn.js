@@ -1,3 +1,5 @@
+var basicLands = ["Plains", "Island", "Swamp", "Mountain", "Forest"]
+
 function showPriceResults() {
     document.getElementById("saveResults").disabled = true;
     document.getElementById("cardPriceList").innerHTML = "";
@@ -16,7 +18,7 @@ function showPriceResults() {
     var limit=30.0;
     var errMsg = "you fool. you absolute baffoon. You think you can challenge me in my own realm? you think you can rebel against the agreed upon deck price limit, which is $"+limit+"? you dare come into my house and upturn my dining chairs and spill coffee grounds in my Keurig? you thought you were safe in your chain mail armor behind that screen of yours. I will take these laminate wood floor boards and destroy you. i didnt want war. but i didnt start it"
 
-    namePromiseList = nameList.map(name => { return new Promise( function(res,rej) {
+    namePromiseList = nameList.filter(name => !basicLands.includes(name)).map(name => { return new Promise( function(res,rej) {
         var price=0;
         var set;
         params["q"] = "!\""+name+"\"";
